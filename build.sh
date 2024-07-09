@@ -4,7 +4,7 @@
 set -e
 
 # Remove potential leftovers from older builds.
-rm -r venv build
+rm -rf venv build
 
 # Create clean Python environment.
 python -m venv --upgrade-deps venv
@@ -33,7 +33,9 @@ nanoemoji --color_format glyf_colr_1 --family 'Fluent Color Emoji' --output_file
 pushd build
 maximum_color --bitmaps --output_file FluentColorEmoji.ttf FluentColorEmoji.ttf
 
+# Move the final font file to the build directory and clean up.
+mv build/FluentColorEmoji.ttf ..
 popd
+rm -rf build *.svg
 popd
-mv build/build/build/FluentColorEmoji.ttf build/FluentColorEmoji.ttf
-rm -r venv build/build build/*.svg
+rm -rf venv
